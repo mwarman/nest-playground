@@ -3,8 +3,7 @@ import {
   Controller,
   Delete,
   Get,
-  HttpException,
-  HttpStatus,
+  NotFoundException,
   Param,
   Post,
   Put,
@@ -35,7 +34,7 @@ export class TodosController {
     if (todo) {
       return todo;
     } else {
-      throw new HttpException('Not found', HttpStatus.NOT_FOUND);
+      throw new NotFoundException();
     }
   }
 
@@ -45,7 +44,7 @@ export class TodosController {
     if (todo) {
       return todo;
     } else {
-      throw new HttpException('Not found', HttpStatus.NOT_FOUND);
+      throw new NotFoundException();
     }
   }
 
