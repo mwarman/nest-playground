@@ -7,12 +7,14 @@ import {
   Param,
   Post,
   Put,
+  UsePipes,
 } from '@nestjs/common';
 
 import { TodosService } from './todos.service';
 import { Todo } from './interfaces/todo.interface';
-import { CreateTodoDto } from './dto/create-todo.dto';
-import { UpdateTodoDto } from './dto/update-todo.dto';
+import { CreateTodoDto, createTodoSchema } from './dto/create-todo.dto';
+import { UpdateTodoDto, updateTodoSchema } from './dto/update-todo.dto';
+import { JoiValidationPipe } from 'src/pipes/joi-validation.pipe';
 
 @Controller('todos')
 export class TodosController {
@@ -24,6 +26,7 @@ export class TodosController {
   }
 
   @Post()
+  @UsePipes(new JoiValidationPipe(createTodoSchema))
   create(@Body() createTodoDto: CreateTodoDto): Todo {
     return this.todosService.create(createTodoDto);
   }
@@ -39,6 +42,7 @@ export class TodosController {
   }
 
   @Put(':id')
+  @UsePipes(new JoiValidationPipe(updateTodoSchema))
   update(@Param('id') id: string, @Body() updateTodoDto: UpdateTodoDto): Todo {
     const todo = this.todosService.update(id, updateTodoDto);
     if (todo) {
