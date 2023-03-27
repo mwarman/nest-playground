@@ -9,6 +9,18 @@ The main elements of the application technology stack are:
 - NestJS - the foundation
 - TypeScript
 
+## Experiment - Docker
+
+The goal of this experiment is to create an optimized Docker image for a NestJS application. In this case the NestJS application is a simple _Hello World_ REST API.
+
+The experiment includes the `Dockerfile` and `.dockerignore` files.
+
+The `package.json` file is updated to include several `scripts` to automate common Docker CLI commands.
+
+See the [Docker CLI reference guide](https://docs.docker.com/engine/reference/commandline/cli/) for more information.
+
+See this [blog post](https://www.tomray.dev/nestjs-docker-production) which influenced the experiment.
+
 ## Repository
 
 The base NestJS application template source code is located on the `main` branch. It remains largely untouched from initial project generation using the Nest CLI.

@@ -6,6 +6,10 @@
   "license": "MIT",
   "scripts": {
     "build": "nest build",
+    "docker:build": "docker image build --tag nest-playground .",
+    "docker:run": "docker container run --publish 3000:3000 --name nest-playground --rm nest-playground",
+    "docker:run:detached": "docker container run --publish 3000:3000 --name nest-playground --rm --detach nest-playground",
+    "docker:stop": "docker container stop nest-playground",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "start": "nest start",
     "start:dev": "nest start --watch",
