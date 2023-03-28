@@ -9,6 +9,16 @@ The main elements of the application technology stack are:
 - NestJS - the foundation
 - TypeScript
 
+## Experiment - GitHub Actions
+
+The goal of this experiment is to create GitHub Actions workflows for continuous integration (CI) activities such as:
+
+- Build the application
+- Lint the application
+- Run unit tests and produce code coverage report
+
+The `.github/workflows` directory contains the workflow specification in the `ci.yml` file.
+
 ## Repository
 
 The base NestJS application template source code is located on the `main` branch. It remains largely untouched from initial project generation using the Nest CLI.
