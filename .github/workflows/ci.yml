@@ -3,7 +3,7 @@ name: CI
 on:
   push:
     branches:
-      - exp/github-actions
+      - 'exp/github-actions'
 
 jobs:
   build:
