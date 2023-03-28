@@ -9,6 +9,16 @@ The main elements of the application technology stack are:
 - NestJS - the foundation
 - TypeScript
 
+## Experiment - Configuration
+
+The package `@nestjs/config` provides `ConfigModule` and `ConfigService` to manage `.env` files.
+
+The `ConfigModule` is bootstrapped in `AppModule` with the `forRoot` method. This method uses the `dotenv` library to load configuration. The configuration is validated and default values are applied using a `joi` schema.
+
+The `ConfigService` is imported in the `GreetingsModule` so that it may be injected into any component within that module, e.g. the `GreetingsService`. The `GreetingsService` illustrates how to fetch configuration values.
+
+The `ConfigService` may also be used in `main.ts`. For example, the `SERVER_PORT` variable is used when starting the application.
+
 ## Repository
 
 The base NestJS application template source code is located on the `main` branch. It remains largely untouched from initial project generation using the Nest CLI.
