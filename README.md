@@ -9,6 +9,18 @@ The main elements of the application technology stack are:
 - NestJS - the foundation
 - TypeScript
 
+## Experiment - Logging
+
+The goal of this experiment is to illustrate the practices for logging in a NestJS application.
+
+The `AppLogger` within the core module is a custom logger. It extends the `ConsoleLogger` which is what NestJS uses by default. It uses application configuration to enable|disable logging and set the logging level.
+
+The `AppLogger` is configured as the global logger for the Nest application in `main.ts`. Therefore, it is able to be consumed by any provider without requiring dependency injection, using the standard `Logger` approach. See an example of this in the `GreetingService`.
+
+There are other approaches for logging in NestJS applications including integration with SaaS logging services.
+
+See the [NestJS guide for the Logger](https://docs.nestjs.com/techniques/logger).
+
 ## Repository
 
 The base NestJS application template source code is located on the `main` branch. It remains largely untouched from initial project generation using the Nest CLI.
