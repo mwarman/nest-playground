@@ -15,19 +15,14 @@ services:
     depends_on:
       db:
         condition: service_healthy
-    # override configuration to use database
-    # and connection URL for 'db' service defined below
-    environment:
-      DB_HOST: db
-      DB_PORT: 5432
-      DB_USER: postgres
-      DB_PASS: nestplayground
-      DB_DATABASE: postgres
+    # use the configuration in the .env file in this file
+    env_file:
+      - .env
     networks:
       - nest-playground-net
     # map ports [host:container]
     ports:
-      - "3000:3000"
+      - "${SERVER_PORT}:${SERVER_PORT}"
     restart: unless-stopped
     # volume configuration for hot reloading in local development
     volumes:
