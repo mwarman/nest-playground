@@ -1,0 +1,64 @@
+name: nest-playground-stack
+services:
+
+  app:
+    # build or use nest-playground:latest
+    image: nest-playground
+    # when image not present or '--build' option used, build a new
+    # nest-playground:latest image using ./Dockerfile
+    build:
+      context: .
+      # only build the 'development' target for local development purposes
+      target: development
+    # run command against the development stage image
+    command: npm run start:dev
+    depends_on:
+      db:
+        condition: service_healthy
+    # override configuration to use database
+    # and connection URL for 'db' service defined below
+    environment:
+      DB_HOST: db
+      DB_PORT: 5432
+      DB_USER: postgres
+      DB_PASS: nestplayground
+      DB_DATABASE: postgres
+    networks:
+      - nest-playground-net
+    # map ports [host:container]
+    ports:
+      - "3000:3000"
+    restart: unless-stopped
+    # volume configuration for hot reloading in local development
+    volumes:
+      - .:/usr/src/app
+
+  db:
+    # use PostgreSQL from Docker Hub
+    image: postgres:15
+    environment:
+      POSTGRES_PASSWORD: nestplayground
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d postgres"]
+      interval: 1s
+      timeout: 5s
+      retries: 10
+    networks:
+      - nest-playground-net
+    # map ports [host:container]
+    # optionally expose db port on 5432 to use CLI, etc
+    ports:
+      - "5432:5432"
+    restart: unless-stopped
+    volumes:
+      # persistent data volume
+      - nest-playground-db:/var/lib/postgresql/data
+      - ./etc/docker/postgres/init:/docker-entrypoint-initdb.d:ro
+
+volumes:
+  # persisent Docker volume for database
+  nest-playground-db:
+
+networks:
+  # Docker network for the application
+  nest-playground-net:
