@@ -9,6 +9,20 @@ The main elements of the application technology stack are:
 - NestJS - the foundation
 - TypeScript
 
+## Experiment - Caching (Basic)
+
+The goal of this experiment is to implement caching for API requests. This experiment utilizes the in-memory cache.
+
+The following dependencies are required for this experiment:
+
+- `cache-manager`
+
+The `CacheModule` is registered within the `AppModule` imports. Default configuration is applied during registration. The `CacheModule` is registered as a _global_ module. Therefore, it is not necessary to explicitly include it in the _imports_ of the `TodosModule`.
+
+The `TodosController` provides an example of instrumenting a CRUD REST API for caching. The `CacheInterceptor` decorates the controller class. This interceptor automatically caches the responses for all `@Get` methods. The cache key is the route path.
+
+The `CacheInterceptor` does not automatically delete cache keys when data is changed in `@Post`, `@Put`, `@Patch`, or `@Delete` methods. The `clearCache` function demonstrates one way of programmatically deleting certain cache keys when data is updated. This method could be moved to a dedicated Provider for reusability.
+
 ## Repository
 
 The base NestJS application template source code is located on the `main` branch. It remains largely untouched from initial project generation using the Nest CLI.
