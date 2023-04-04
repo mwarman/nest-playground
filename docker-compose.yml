@@ -1,0 +1,50 @@
+name: nest-playground-stack
+services:
+
+  app:
+    # build or use nest-playground:latest
+    image: nest-playground
+    # when image not present or '--build' option used, build a new
+    # nest-playground:latest image using ./Dockerfile
+    build:
+      context: .
+      # only build the 'development' target for local development purposes
+      target: development
+    # run command against the development stage image
+    command: npm run start:dev
+    depends_on:
+      - cache
+    # use the configuration in the .env file in this file
+    env_file:
+      - .env
+    networks:
+      - nest-playground-net
+    # map ports [host:container]
+    ports:
+      - "${SERVER_PORT}:${SERVER_PORT}"
+    restart: unless-stopped
+    # volume configuration for hot reloading in local development
+    volumes:
+      - .:/usr/src/app
+
+  cache:
+    # use Redis from Docker Hub
+    image: redis:7
+    networks:
+      - nest-playground-net
+    # map ports [host:container]
+    # optionally expose db port on 6379 to use CLI, etc
+    ports:
+      - "6379:6379"
+    restart: unless-stopped
+    # persistent data volume
+    volumes:
+      - nest-playground-cache:/data
+
+volumes:
+  # persisent Docker volume for the cache
+  nest-playground-cache:
+
+networks:
+  # Docker network for the application
+  nest-playground-net:
