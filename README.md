@@ -19,6 +19,20 @@ The following dependencies are installed for this experiment:
 
 - `@nestjs/jwt`
 
+### Application Changes for Authentication
+
+The `AuthModule` and related components encapsulate the authentication logic. The logic in this experiment is contrived and overly simplistic; however, it illustrates the basic approach for implementing global API authentication.
+
+The `AuthService` implements a `signIn` method which authenticates a user with their supplied credentials and returns a JSON Web Token, abbreviated JWT, when successful. The JWT has an encrypted payload containing user attributes. The token must be passed to any endpoints which require authentication in the `Authorization` header using the _Bearer_ format, e.g. `Bearer abc123.def456`.
+
+The `@nestjs/jwt` library provides low-level support for JWTs. The `JwtModule` is registered and configured in `AuthModule`.
+
+The `AuthController` exposes a `signIn` endpoint which accepts the user's credentials and calls the `AuthService`.
+
+In NestJS, _Guards_ are providers which protect endpoints. They are invoked with the endpoint request and the execution context. The `AuthGuard` authenticates a request for a protected endpoint. In this experiment, the `AuthGuard` is configured as a _global_ guard in `AuthModule` which applies it to all endpoints without needing to explicitly decorate them.
+
+Some endpoints, such as the `/auth/signin` endpoint, need to be public. The `Public` decorator is applied to all controller classes or methods which do not require authentication. The logic in `AuthGuard` looks for the presence of the `Public` decorator, bypassing authentication when present.
+
 ### Further Reading
 
 - [NestJS Authentication Guide](https://docs.nestjs.com/security/authentication)
