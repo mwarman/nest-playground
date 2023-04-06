@@ -9,6 +9,20 @@ The main elements of the application technology stack are:
 - NestJS - the foundation
 - TypeScript
 
+## Experiment - Auth
+
+The goal of this experiment is to explore the fundamentals of authentication and authorization.
+
+### Dependencies
+
+The following dependencies are installed for this experiment:
+
+- `@nestjs/jwt`
+
+### Further Reading
+
+- [NestJS Authentication Guide](https://docs.nestjs.com/security/authentication)
+
 ## Repository
 
 The base NestJS application template source code is located on the `main` branch. It remains largely untouched from initial project generation using the Nest CLI.
