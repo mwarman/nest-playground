@@ -33,6 +33,25 @@ In NestJS, _Guards_ are providers which protect endpoints. They are invoked with
 
 Some endpoints, such as the `/auth/signin` endpoint, need to be public. The `Public` decorator is applied to all controller classes or methods which do not require authentication. The logic in `AuthGuard` looks for the presence of the `Public` decorator, bypassing authentication when present.
 
+### Application Changes for Authorization
+
+Authentication verifies the identity of a client. _Authorization_ determines if a verified client is _permitted_ to perform the requested operation.
+
+To implement a simple role-based access control (RBAC) approach, the `Roles` decorator is used on controller classes and methods to indicate which role(s) are required to access the endpoint(s). The absence of a `Roles` decorator indicates that any role (or no role, i.e. Public) is required to access the endpoint.
+
+The `RolesGuard` authorizes a request for a protected endpoint. The `RolesGuard` is configured as a _global_ guard in `AuthModule` which applies it to all endpoints without needing to explicitly decorate them.
+
+The `RolesGuard` compares the roles required to access the endpoint, i.e. those from the `Roles` decorator, to those roles granted to the authenticated user. If the user has at least one of the required roles, access is granted. Otherwise a `403 Forbidden` error is returned to the client.
+
+### Postman
+
+The Postman collection in the `/docs` directory contains all of the APIs used in this experiment.
+
+- `/auth/login`
+- `/auth/profile`
+- `/users`
+- `/users/:id`
+
 ### Further Reading
 
 - [NestJS Authentication Guide](https://docs.nestjs.com/security/authentication)

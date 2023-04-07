@@ -8,3 +8,8 @@ export const jwtConstants = {
   secret:
     'PLACEHOLDER. GENERATE A COMPLEX SECRET AND NEVER INCLUDE IT WITH THE SOURCE CODE.',
 };
+
+export enum Role {
+  User = 'user',
+  Admin = 'admin',
+}

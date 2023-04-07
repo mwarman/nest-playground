@@ -11,6 +11,8 @@ import {
 import { SignInDto } from './dto/sign-in.dto';
 import { AuthService } from './auth.service';
 import { Public } from './decorators/public.decorator';
+import { Roles } from './decorators/roles.decorator';
+import { Role } from './auth.constants';
 
 @Controller('auth')
 export class AuthController {
@@ -24,6 +26,7 @@ export class AuthController {
   }
 
   @Get('profile')
+  @Roles(Role.User)
   getProfile(@Request() req) {
     return req.user;
   }
