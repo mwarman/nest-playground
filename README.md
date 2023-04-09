@@ -13,7 +13,7 @@ The main elements of the application technology stack are:
 
 The base NestJS application template source code is located on the `main` branch. It remains largely untouched from initial project generation using the Nest CLI.
 
-Individual experiments are created on dedicated branches prefixed with `exp/*`. For example, the `exp/rest-basic` branch demonstrates how to create a simple REST API. The focus is on the mechanics of routing and code organization.
+Individual experiments are created on dedicated branches prefixed with `exp/*`. For example, the `exp/rest-basic` branch demonstrates how to create a simple REST API. The focus is on the mechanics of routing and code organization. See the [list of repository branches](https://github.com/mwarman/nest-playground/branches/all) for all experiments.
 
 ## Installation
 
