@@ -13,6 +13,30 @@ The main elements of the application technology stack are:
 
 The goal of this experiment is to explore the fundamentals of _testing_ within the NestJS framework.
 
+### Unit Tests
+
+The `todos.controller.spec.ts` module illustrates how to create unit tests for a NestJS component.
+
+The `beforeEach` function executes before _each_ test. It uses the NestJS `TestingModule` to instantiate the portion of the NestJS application under test. The fully configured components may be fetched for testing.
+
+A simple _should be defined_ test checks to ensure that the components under test have been created and configured appropriately.
+
+A nested `describe` block contains tests for a single controller function, in this case the `findAll` function. This example shows test fixture data embedded within the test; however, fixtures may be externalized for reuse.
+
+The test itself shows the process to set up the test, that is, to mock dependencies. Next function under test is executed and results stored. Finally, the results are asserted.
+
+### End-to-End Tests
+
+End-to-end (E2E) tests are located in the `/tests` directory. These tests simulate executing the application in the same manner as a real request. In this example, that means handling a HTTP request in an API endpoint.
+
+The `todos.e2e-spec.ts` module illustrates how to create E2E tests for a NestJS application.
+
+The `beforeAll` function executes once before any of the tests. Much like a unit test, the function sets up the module to be tested. Provider implementations may be overridden as needed. Finally, a full NestJS application is created an initialized after which it is ready to receive requests.
+
+The `supertest` library is used to create HTTP requests and assert HTTP responses.
+
+The `afterAll` function executes once after all of the tests. This function closes the NestJS application.
+
 ## Repository
 
 The base NestJS application template source code is located on the `main` branch. It remains largely untouched from initial project generation using the Nest CLI.
