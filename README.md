@@ -9,6 +9,10 @@ The main elements of the application technology stack are:
 - NestJS - the foundation
 - TypeScript
 
+## Experiment - Testing
+
+The goal of this experiment is to explore the fundamentals of _testing_ within the NestJS framework.
+
 ## Repository
 
 The base NestJS application template source code is located on the `main` branch. It remains largely untouched from initial project generation using the Nest CLI.
